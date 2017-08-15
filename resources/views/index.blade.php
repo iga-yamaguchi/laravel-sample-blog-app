@@ -46,21 +46,24 @@
         </div><!-- /.container-fluid -->
     </nav>
 </header>
-<main>
-    <div class="row">
+<div class="container">
+    <main class="col-sm-8">
         @for($i = 0; $i < 20; $i++ )
-            <article class="col-sm-4">
+            <article class="col-sm-12">
                 <section>
-                    <h2>Title{{ $i }}</h2>
                     <div>img...</div>
+                    <h2><a href="#">Title{{ $i }}</a></h2>
                     <div>
                         outline{{ $i }}
                     </div>
                 </section>
             </article>
         @endfor
-    </div>
-</main>
+    </main>
+    <aside class="col-sm-4">
+        <p>sidebar</p>
+    </aside>
+</div>
 <footer>
     <div class="panel panel-default">
         <div class="panel-footer">copyright</div>
