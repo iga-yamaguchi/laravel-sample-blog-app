@@ -49,15 +49,21 @@
 <div class="container">
     <main class="col-sm-8">
         @for($i = 0; $i < 20; $i++ )
-            <article class="col-sm-12">
-                <section>
-                    <div>img...</div>
-                    <h2><a href="#">Title{{ $i }}</a></h2>
-                    <div>
-                        outline{{ $i }}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="thumbnail">
+                        <img src="/img/300x300.png" alt="...">
+                        <div class="caption">
+                            <h3>Title{{ $i }}</h3>
+                            <p>outline{{ $i }}</p>
+                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
+                                                                                               class="btn btn-default"
+                                                                                               role="button">Button</a>
+                            </p>
+                        </div>
                     </div>
-                </section>
-            </article>
+                </div>
+            </div>
         @endfor
     </main>
     <aside class="col-sm-4">
