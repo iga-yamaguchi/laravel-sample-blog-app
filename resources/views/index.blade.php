@@ -61,7 +61,11 @@
         @endfor
     </main>
     <aside class="col-sm-4">
-        <p>sidebar</p>
+        <ol class="list-group">
+            @for($i = 2017; $i >= 2000; $i--)
+                <li class="list-group-item">{{ $i }}</li>
+            @endfor
+        </ol>
     </aside>
 </div>
 <footer>
