@@ -56,10 +56,7 @@
                         <div class="caption">
                             <h3>Title{{ $i }}</h3>
                             <p>outline{{ $i }}</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                               class="btn btn-default"
-                                                                                               role="button">Button</a>
-                            </p>
+                            <p class="text-right"><a href="#" class="btn btn-default" role="button">More</a></p>
                         </div>
                     </div>
                 </div>
