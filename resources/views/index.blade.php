@@ -55,6 +55,9 @@
                         <img src="/img/300x300.png" alt="...">
                         <div class="caption">
                             <h3>Title{{ $i }}</h3>
+                            <a href="#"><span class="label label-info">Column</span></a>
+                            <a href="#"><span class="label label-info">Recommendation</span></a>
+                            <a href="#"><span class="label label-info">Alert</span></a>
                             <p>outline{{ $i }}</p>
                             <p class="text-right"><a href="#" class="btn btn-default" role="button">More</a></p>
                         </div>
@@ -69,6 +72,11 @@
                 <li class="list-group-item">{{ $i }}</li>
             @endfor
         </ol>
+        <ul class="list-inline">
+            <li class=""><a href="#"><span class="label label-default">Aaaaaaa</span></a></li>
+            <li class=""><a href="#"><span class="label label-default">Aaaaaaa</span></a></li>
+            <li class=""><a href="#"><span class="label label-default">Aaaaaaa</span></a></li>
+        </ul>
     </aside>
 </div>
 <footer>
