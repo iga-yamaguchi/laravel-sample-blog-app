@@ -18,7 +18,7 @@ class TagsTableSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             Tag::create([
-                'name' => $faker->word
+                'name' => $faker->word,
             ]);
         }
     }
