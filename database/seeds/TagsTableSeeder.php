@@ -13,13 +13,9 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tags')->delete();
-        $faker = Faker\Factory::create('en_US');
-
-        for ($i = 0; $i < 10; $i++) {
-            Tag::create([
-                'name' => $faker->word,
-            ]);
-        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('tags')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        factory(App\Tag::class, 10)->create();
     }
 }
