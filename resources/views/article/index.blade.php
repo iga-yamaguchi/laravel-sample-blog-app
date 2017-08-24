@@ -55,9 +55,9 @@
                         <img src="{{ $article->image_path }}" alt="...">
                         <div class="caption">
                             <h3>{{ $article->title }}</h3>
-                            <a href="#"><span class="label label-info">Column</span></a>
-                            <a href="#"><span class="label label-info">Recommendation</span></a>
-                            <a href="#"><span class="label label-info">Alert</span></a>
+                            @foreach($article->tags as $tag)
+                                <a href="#"><span class="label label-info">{{ $tag->name }}</span></a>
+                            @endforeach
                             <p>{{ $article->content }}</p>
                             <p class="text-right"><a href="#" class="btn btn-default" role="button">More</a></p>
                         </div>
