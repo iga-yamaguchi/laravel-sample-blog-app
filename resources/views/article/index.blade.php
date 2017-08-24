@@ -48,23 +48,23 @@
 </header>
 <div class="container">
     <main class="col-sm-8">
-        @for($i = 0; $i < 20; $i++ )
+        @foreach($articles as $article)
             <div class="row">
                 <div class="col-sm-12">
                     <div class="thumbnail">
-                        <img src="/img/300x300.png" alt="...">
+                        <img src="{{ $article->image_path }}" alt="...">
                         <div class="caption">
-                            <h3>Title{{ $i }}</h3>
+                            <h3>{{ $article->title }}</h3>
                             <a href="#"><span class="label label-info">Column</span></a>
                             <a href="#"><span class="label label-info">Recommendation</span></a>
                             <a href="#"><span class="label label-info">Alert</span></a>
-                            <p>outline{{ $i }}</p>
+                            <p>{{ $article->content }}</p>
                             <p class="text-right"><a href="#" class="btn btn-default" role="button">More</a></p>
                         </div>
                     </div>
                 </div>
             </div>
-        @endfor
+        @endforeach
     </main>
     <aside class="col-sm-4">
         <ol class="list-group">
