@@ -52,9 +52,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="thumbnail">
-                        <img src="{{ $article->image_path }}" alt="...">
+                        <a href="#"><img src="{{ $article->image_path }}" alt="..."></a>
                         <div class="caption">
-                            <h3>{{ $article->title }}</h3>
+                            <a href="#"><h3>{{ $article->title }}</h3></a>
                             @foreach($article->tags as $tag)
                                 <a href="#"><span class="label label-info">{{ $tag->name }}</span></a>
                             @endforeach
