@@ -10,6 +10,6 @@ class Tag extends Model
 
     public function articles()
     {
-        return $this->belongsToMany('App\Article', 'article_tag_relations', 'tag_id', 'article_id')->withTimestamps();
+        return $this->belongsToMany('App\Article', 'article_tag_relations', 'tag_id', 'article_id');
     }
 }

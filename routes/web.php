@@ -11,4 +11,6 @@
 |
 */
 
-Route::get('/', 'ArticleController@index');
+Route::get('/', 'ArticleController@index')->name('index');
+
+Route::resource('tag', 'TagController', ['except' => ['index']]);
