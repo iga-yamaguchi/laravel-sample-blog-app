@@ -58,7 +58,8 @@
                             @foreach($article->tags as $tag)
                                 <a href="#"><span class="label label-info">{{ $tag->name }}</span></a>
                             @endforeach
-                            <p>{{ $article->content }}</p>
+                            <p class="text-primary">{{ $article->created_at }}</p>
+                            <p class="lead">{{ $article->content }}</p>
                             <p class="text-right"><a href="#" class="btn btn-default" role="button">More</a></p>
                         </div>
                     </div>
