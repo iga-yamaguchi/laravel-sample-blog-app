@@ -8,6 +8,8 @@ class Tag extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = ['name'];
+
     public function articles()
     {
         return $this->belongsToMany('App\Article', 'article_tag_relations', 'tag_id', 'article_id');

@@ -26,8 +26,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->name;
-        return view('tag.store', compact('name'));
+        $tag = Tag::create($request->all());
+        return view('tag.store', ['name' => $tag->name]);
     }
 
     /**
