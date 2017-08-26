@@ -1,5 +1,5 @@
-@extends('layout')
-@section('content')
+@extends('two-column')
+@section('main')
     @foreach($articles as $article)
         <div class="row">
             <div class="col-sm-12">
