@@ -26,7 +26,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->name;
+        return view('tag.store', compact('name'));
     }
 
     /**
