@@ -1,7 +1,11 @@
 @extends('one-column')
 
 @section('main')
-    {{ Form::open(['route' => 'tag.store']) }}
+    @if(isset($tag))
+        {{ Form::model($tag, ['route' => ['tag.update', $tag], 'method' => 'PUT']) }}
+    @else
+        {{ Form::open(['route' => 'tag.store']) }}
+    @endif
     <div class="form-group">
         {{ Form::Label('name', 'Tag name') }}
         {{ Form::text('name', null, ['class' => 'form-control']) }}
