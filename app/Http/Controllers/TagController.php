@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 class TagController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $tags = Tag::with('articles')->get();
+        return view('tag.index', compact('tags'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
