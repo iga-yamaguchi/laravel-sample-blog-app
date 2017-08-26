@@ -42,6 +42,7 @@
                             <li><a href="#">EEE</a></li>
                         </ul>
                     </li>
+                    <li><a href="{{ route('tag.create') }}">Tag Create</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
