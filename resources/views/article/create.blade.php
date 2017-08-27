@@ -13,6 +13,14 @@
         {{ Form::Label('content', 'Content') }}
         {{ Form::textarea('content', null, ['class' => 'form-control']) }}
     </div>
+    <div class="form-group">
+        @foreach($tags as $tag)
+            {{ Form::checkbox('tag_id[]', $tag->id, false, ['id' => 'tag-' . $tag->id]) }}
+            {{ Form::Label('tag-' . $tag->id, $tag->name) }}
+        @endforeach
+    </div>
+
+
     {{ Form::submit('Submit', ['class' => 'btn btn-default']) }}
     {{ Form::close() }}
 @endsection
