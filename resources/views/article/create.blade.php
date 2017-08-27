@@ -1,7 +1,7 @@
 @extends('one-column')
 @section('main')
     @if(isset($article))
-        {{ Form::model($article, ['route' => ['article.update', $article->id], 'method' => 'PUT']) }}
+        {{ Form::model($article, ['route' => ['article.update', $article->id], 'method' => 'PUT', 'files' => true]) }}
     @else
         {{ Form::open(['route' => 'article.store']) }}
     @endif
@@ -18,6 +18,10 @@
             {{ Form::checkbox('tag_id[]', $tag->id, false, ['id' => 'tag-' . $tag->id]) }}
             {{ Form::Label('tag-' . $tag->id, $tag->name) }}
         @endforeach
+    </div>
+    <div class="form-group">
+        {{ Form::Label('image', 'Image') }}
+        {{ Form::file('image') }}
     </div>
 
 

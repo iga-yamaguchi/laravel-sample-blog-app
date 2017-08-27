@@ -49,8 +49,16 @@ class ArticleController extends Controller
 
     public function update(Request $request, Article $article)
     {
-        $article->update($request->all());
+        $input    = $request->all();
+        $filename = null;
 
+        if ($request->file('image')) {
+            $filename = $request->file('image')->store('public/uploads');
+        }
+
+        $input['image_path'] = basename($filename);
+
+        $article->update($input);
         DB::transaction(function () use ($article, $request) {
             $tag_ids = $request->exists('tag_id') ? $request->input('tag_id') : [];
             $article->tags()->sync($tag_ids);
