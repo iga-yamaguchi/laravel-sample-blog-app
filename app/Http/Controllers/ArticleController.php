@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Repositories\ArticleRepository;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
+    private $articleRepository;
+
+    public function __construct(ArticleRepository $articleRepository)
+    {
+        $this->articleRepository = $articleRepository;
+    }
+
     public function index()
     {
-        $articles = Article::orderby('created_at', 'desc')->get();
+        $articles = $this->articleRepository->all();
         $tags     = Tag::all();
 
         return view('article.index', compact('articles', 'tags'));
@@ -25,12 +33,7 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-        $article = Article::create($request->all());
-
-        DB::transaction(function () use ($article, $request) {
-            $tag_ids = $request->exists('tag_id') ? $request->input('tag_id') : [];
-            $article->tags()->sync($tag_ids);
-        });
+        $article = $this->articleRepository->create($request);
 
         return view('article.store', ['title' => $article->title]);
     }
@@ -57,12 +60,7 @@ class ArticleController extends Controller
         }
 
         $input['image_path'] = basename($filename);
-
-        $article->update($input);
-        DB::transaction(function () use ($article, $request) {
-            $tag_ids = $request->exists('tag_id') ? $request->input('tag_id') : [];
-            $article->tags()->sync($tag_ids);
-        });
+        $article = $this->articleRepository->update($article->id, $input);
 
         return view('article.update', ['title' => $article->title]);
     }
