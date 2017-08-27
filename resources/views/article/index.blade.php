@@ -12,7 +12,7 @@
                         @endforeach
                         <p class="text-primary">{{ $article->created_at }}</p>
                         <p class="lead">{{ $article->content }}</p>
-                        <p class="text-right"><a href="#" class="btn btn-default" role="button">More</a></p>
+                        <p class="text-right"><a href="{{ route('article.show', $article) }}" class="btn btn-default" role="button">More</a></p>
                     </div>
                 </div>
             </div>

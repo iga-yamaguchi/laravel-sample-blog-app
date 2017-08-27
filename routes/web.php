@@ -13,4 +13,5 @@
 
 Route::get('/', 'ArticleController@index')->name('index');
 
+Route::resource('article', 'ArticleController');
 Route::resource('tag', 'TagController');
