@@ -23,7 +23,8 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-
+        $article = Article::create($request->all());
+        return view('article.store', ['title' => $article->title]);
     }
 
     public function show(Article $article)
@@ -34,16 +35,19 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-
+        return view('article.create', compact('article'));
     }
 
     public function update(Request $request, Article $article)
     {
-
+        $article->update($request->all());
+        return view('article.update', ['title' => $article->title]);
     }
 
     public function destroy(Article $article)
     {
+        $article->delete();
+        return view('article.destroy', ['title' => $article->title]);
 
     }
 }

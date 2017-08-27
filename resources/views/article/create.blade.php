@@ -1,6 +1,10 @@
 @extends('one-column')
 @section('main')
-    {{ Form::open(['route' => 'article.store']) }}
+    @if(isset($article))
+        {{ Form::model($article, ['route' => ['article.update', $article->id], 'method' => 'PUT']) }}
+    @else
+        {{ Form::open(['route' => 'article.store']) }}
+    @endif
     <div class="form-group">
         {{ Form::Label('title', 'Title') }}
         {{ Form::text('title', null, ['class' => 'form-control']) }}
