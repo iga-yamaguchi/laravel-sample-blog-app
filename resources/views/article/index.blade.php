@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="thumbnail">
-                    <a href="#"><img src="{{ $article->image_path }}" alt="..."></a>
+                    <a href="{{ route('article.show', $article) }}"><img src="{{ $article->image_path }}" alt="..."></a>
                     <div class="caption">
-                        <a href="#"><h3>{{ $article->title }}</h3></a>
+                        <a href="{{ route('article.show', $article) }}"><h3>{{ $article->title }}</h3></a>
                         @foreach($article->tags as $tag)
                             <a href="{{ route('tag.show', $tag) }}"><span class="label label-info">{{ $tag->name }}</span></a>
                         @endforeach
