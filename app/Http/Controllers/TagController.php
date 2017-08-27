@@ -75,7 +75,8 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $tag->update($request->all());
+        return view('tag.update', ['name' => $tag->name]);
     }
 
     /**
@@ -86,6 +87,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return view('tag.destroy', ['name' => $tag->name]);
     }
 }
