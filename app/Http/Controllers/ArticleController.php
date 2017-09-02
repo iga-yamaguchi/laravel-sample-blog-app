@@ -21,8 +21,9 @@ class ArticleController extends Controller
     {
         $articles = $this->articleRepository->all();
         $tags     = Tag::all();
+        $yearList = $this->articleRepository->yearList();
 
-        return view('article.index', compact('articles', 'tags'));
+        return view('article.index', compact('articles', 'tags', 'yearList'));
     }
 
     public function create()
@@ -70,5 +71,14 @@ class ArticleController extends Controller
         $article->delete();
         return view('article.destroy', ['title' => $article->title]);
 
+    }
+
+    public function year($year)
+    {
+        $articles = $this->articleRepository->showByYear($year);
+        $tags = Tag::all();
+        $yearList = $this->articleRepository->yearList();
+
+        return view('article.index', compact('articles', 'tags', 'yearList'));
     }
 }

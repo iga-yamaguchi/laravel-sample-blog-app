@@ -5,9 +5,9 @@
     </main>
     <aside class="col-sm-4">
         <ol class="list-group">
-            @for($i = 2017; $i >= 2000; $i--)
-                <li class="list-group-item">{{ $i }}</li>
-            @endfor
+            @foreach($yearList as $year => $articles)
+                <li class="list-group-item"><a href="{{ route('article.year', $year) }}">{{ $year }}</a></li>
+            @endforeach
         </ol>
         <ul class="list-inline">
             @foreach($tags as $tag)

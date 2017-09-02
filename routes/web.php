@@ -14,4 +14,5 @@
 Route::get('/', 'ArticleController@index')->name('index');
 
 Route::resource('article', 'ArticleController');
+Route::get('article/year/{article}', 'ArticleController@year')->name('article.year');
 Route::resource('tag', 'TagController');

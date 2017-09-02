@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Article;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ArticleRepository
@@ -41,5 +42,23 @@ class ArticleRepository
         });
 
         return $article;
+    }
+
+    public function showByYear($year = null)
+    {
+        $articles = $this->article->whereYear('created_at', $year)->get();
+//        dd($articles->get()->toArray());
+        return $articles;
+    }
+
+    public function yearList()
+    {
+        return $this->article
+            ->select('created_at')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy(function ($d) {
+                return Carbon::parse($d->created_at)->format('Y');
+            });
     }
 }
