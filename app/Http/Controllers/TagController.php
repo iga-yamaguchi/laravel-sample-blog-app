@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Repositories\ArticleRepository;
 use App\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    private $articleRepository;
+
+    public function __construct(ArticleRepository $articleRepository)
+    {
+        $this->articleRepository = $articleRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -51,8 +58,9 @@ class TagController extends Controller
     {
         $articles = $tag->articles;
         $tags     = $tag->all();
+        $yearList = $this->articleRepository->yearList();
 
-        return view('article.index', compact('articles', 'tags'));
+        return view('article.index', compact('articles', 'tags', 'yearList'));
     }
 
     /**

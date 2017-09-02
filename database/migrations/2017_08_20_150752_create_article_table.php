@@ -17,7 +17,7 @@ class CreateArticleTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('content');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
