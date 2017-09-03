@@ -37,8 +37,10 @@ class ArticleControllerTest extends TestCase
         $this->put('article/' . $this->articles[0]->id, $article->toArray())
             ->assertStatus(200);
 
-        // TODO: Probably image file problem
-//        $this->assertDatabaseHas('articles', $article->toArray());
+        // TODO: test image_path
+        $resultOfRemovingImage = $article->toArray();
+        unset($resultOfRemovingImage['image_path']);
+        $this->assertDatabaseHas('articles', $resultOfRemovingImage);
     }
 
     public function testDelete()
