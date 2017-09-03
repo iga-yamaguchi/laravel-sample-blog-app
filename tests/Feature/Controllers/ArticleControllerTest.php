@@ -19,6 +19,7 @@ class ArticleControllerTest extends TestCase
     }
 
     public function testDeleteFromView()
+    public function testDelete()
     {
         $id = $this->articles[0]->id;
         $this->delete('article/' . $id)
