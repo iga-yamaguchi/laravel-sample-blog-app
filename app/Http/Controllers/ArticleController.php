@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Http\Requests\ArticleRequest;
 use App\Repositories\ArticleRepository;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class ArticleController extends Controller
         return view('article.create', compact('tags'));
     }
 
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
         $article = $this->articleRepository->create($request);
 
@@ -51,7 +52,7 @@ class ArticleController extends Controller
         return view('article.create', compact('article', 'tags'));
     }
 
-    public function update(Request $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
         $input    = $request->all();
         $filename = null;

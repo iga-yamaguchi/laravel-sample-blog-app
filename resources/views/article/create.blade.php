@@ -1,5 +1,6 @@
 @extends('one-column')
 @section('main')
+    @include('error')
     @if(isset($article))
         {{ Form::model($article, ['route' => ['article.update', $article->id], 'method' => 'PUT', 'files' => true]) }}
     @else
