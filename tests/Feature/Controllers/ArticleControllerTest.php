@@ -24,16 +24,21 @@ class ArticleControllerTest extends TestCase
 
     public function testCreate()
     {
-        $articles = factory(Article::class, 1)->make();
+        $article = factory(Article::class)->make();
 
-        $this->post('article', $articles[0]->toArray())
+        $this->post('article', $article->toArray())
             ->assertStatus(200);
-        $this->assertDatabaseHas('articles', $articles[0]->toArray());
+        $this->assertDatabaseHas('articles', $article->toArray());
     }
 
     public function testUpdate()
     {
-        $this->markTestIncomplete();
+        $article = factory(Article::class)->make();
+        $this->put('article/' . $this->articles[0]->id, $article->toArray())
+            ->assertStatus(200);
+
+        // TODO: Probably image file problem
+//        $this->assertDatabaseHas('articles', $article->toArray());
     }
 
     public function testDelete()
