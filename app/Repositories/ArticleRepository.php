@@ -47,7 +47,6 @@ class ArticleRepository
     public function showByYear($year = null)
     {
         $articles = $this->article->whereYear('created_at', $year)->get();
-//        dd($articles->get()->toArray());
         return $articles;
     }
 
