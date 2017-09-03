@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Http\Requests\TagRequest;
 use App\Repositories\ArticleRepository;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -39,10 +40,10 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  TagRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
         $tag = Tag::create($request->all());
         return view('tag.store', ['name' => $tag->name]);
@@ -77,11 +78,11 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  TagRequest $request
      * @param  \App\Tag                 $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
         $tag->update($request->all());
         return view('tag.update', ['name' => $tag->name]);
