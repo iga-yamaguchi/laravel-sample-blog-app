@@ -31,6 +31,11 @@ class ArticleControllerTest extends TestCase
         $this->assertDatabaseHas('articles', $articles[0]->toArray());
     }
 
+    public function testUpdate()
+    {
+        $this->markTestIncomplete();
+    }
+
     public function testDelete()
     {
         $id = $this->articles[0]->id;
@@ -38,5 +43,20 @@ class ArticleControllerTest extends TestCase
             ->assertStatus(200);
         $this->assertDatabaseHas('articles', ['id' => $id])
             ->assertDatabaseMissing('articles', ['id' => $id, 'deleted_at' => null]);
+    }
+
+    public function testCreateFromView()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testUpdateFromView()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testDeleteFromView()
+    {
+        $this->markTestIncomplete();
     }
 }
