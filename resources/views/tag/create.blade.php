@@ -1,6 +1,7 @@
 @extends('one-column')
 
 @section('main')
+    @include('error')
     @if(isset($tag))
         {{ Form::model($tag, ['route' => ['tag.update', $tag], 'method' => 'PUT']) }}
     @else
