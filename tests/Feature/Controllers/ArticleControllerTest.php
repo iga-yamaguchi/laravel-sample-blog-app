@@ -27,7 +27,7 @@ class ArticleControllerTest extends TestCase
         $article = factory(Article::class)->make();
 
         $this->post('article', $article->toArray())
-            ->assertStatus(200);
+            ->isOk();
         $this->assertDatabaseHas('articles', $article->toArray());
     }
 
@@ -35,7 +35,7 @@ class ArticleControllerTest extends TestCase
     {
         $article = factory(Article::class)->make();
         $this->put('article/' . $this->articles[0]->id, $article->toArray())
-            ->assertStatus(200);
+            ->isOk();
 
         // TODO: test image_path
         $resultOfRemovingImage = $article->toArray();
@@ -47,18 +47,20 @@ class ArticleControllerTest extends TestCase
     {
         $id = $this->articles[0]->id;
         $this->delete('article/' . $id)
-            ->assertStatus(200);
+            ->isOk();
         $this->assertDatabaseHas('articles', ['id' => $id])
             ->assertDatabaseMissing('articles', ['id' => $id, 'deleted_at' => null]);
     }
 
     public function testCreateFromView()
     {
+        // TODO: test image_path
         $this->markTestIncomplete();
     }
 
     public function testUpdateFromView()
     {
+        // TODO: test image_path
         $this->markTestIncomplete();
     }
 
