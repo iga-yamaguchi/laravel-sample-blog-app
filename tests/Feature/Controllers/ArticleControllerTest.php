@@ -26,6 +26,7 @@ class ArticleControllerTest extends TestCase
     {
         $article = factory(Article::class)->make();
 
+        // TODO: test sync relation
         $this->post('article', $article->toArray())
             ->isOk();
         $this->assertDatabaseHas('articles', $article->toArray());
