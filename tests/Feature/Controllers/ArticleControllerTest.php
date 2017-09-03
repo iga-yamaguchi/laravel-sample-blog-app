@@ -51,21 +51,4 @@ class ArticleControllerTest extends TestCase
         $this->assertDatabaseHas('articles', ['id' => $id])
             ->assertDatabaseMissing('articles', ['id' => $id, 'deleted_at' => null]);
     }
-
-    public function testCreateFromView()
-    {
-        // TODO: test image_path
-        $this->markTestIncomplete();
-    }
-
-    public function testUpdateFromView()
-    {
-        // TODO: test image_path
-        $this->markTestIncomplete();
-    }
-
-    public function testDeleteFromView()
-    {
-        $this->markTestIncomplete();
-    }
 }

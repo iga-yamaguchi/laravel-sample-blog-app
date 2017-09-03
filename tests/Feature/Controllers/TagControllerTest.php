@@ -48,19 +48,4 @@ class TagControllerTest extends TestCase
         $this->assertDatabaseHas('tags', ['id' => $id])
             ->assertDatabaseMissing('tags', ['id' => $id, 'deleted_at' => null]);
     }
-
-    public function testCreateFromView()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testUpdateFromView()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testDeleteFromView()
-    {
-        $this->markTestIncomplete();
-    }
 }
