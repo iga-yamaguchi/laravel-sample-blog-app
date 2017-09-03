@@ -31,8 +31,6 @@ class ArticleRequest extends FormRequest
                 ];
             case'PUT':
             case'PATCH':
-//                var_dump($this->article->id);
-//                exit();
                 return [
                     'title'   => 'required|string',
                     'content' => 'required|string'
