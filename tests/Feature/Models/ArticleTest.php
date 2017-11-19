@@ -31,7 +31,6 @@ class ArticleTest extends TestCase
 
         foreach ($article->tags as $key => $tag) {
             $tagArray = $tags[$key]->toArray();
-            $tagArray['deleted_at'] = null;
 
             $this->assertEquals($tag->toArray(), $tagArray);
         }

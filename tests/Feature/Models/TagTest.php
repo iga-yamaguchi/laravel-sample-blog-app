@@ -29,11 +29,11 @@ class TagTest extends TestCase
 
         $ids = $articles->pluck('id');
         $tag->articles()->attach($ids);
+
         $this->assertEquals($articles->count(), $tag->articles->count());
 
         foreach ($tag->articles as $key => $article) {
             $articleArray = $articles[$key]->toArray();
-            $articleArray['deleted_at'] = null;
 
             $this->assertEquals($article->toArray(), $articleArray);
         }

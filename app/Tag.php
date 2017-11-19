@@ -12,7 +12,7 @@ class Tag extends Model
     public $timestamps = false;
 
     protected $fillable = ['name'];
-    protected $hidden = ['pivot'];
+    protected $hidden = ['pivot', 'deleted_at'];
 
     public function articles()
     {
