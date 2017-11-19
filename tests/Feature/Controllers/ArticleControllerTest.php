@@ -4,6 +4,7 @@ namespace Tests\Feature\Controllers;
 
 use App\Article;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -28,7 +29,7 @@ class ArticleControllerTest extends TestCase
 
         // TODO: test sync relation
         $this->post('article', $article->toArray())
-            ->isOk();
+            ->assertStatus(Response::HTTP_OK);
         $this->assertDatabaseHas('articles', $article->toArray());
     }
 
@@ -36,7 +37,7 @@ class ArticleControllerTest extends TestCase
     {
         $article = factory(Article::class)->make();
         $this->put('article/' . $this->articles[0]->id, $article->toArray())
-            ->isOk();
+            ->assertStatus(Response::HTTP_OK);
 
         // TODO: test image_path
         $resultOfRemovingImage = $article->toArray();
@@ -48,7 +49,7 @@ class ArticleControllerTest extends TestCase
     {
         $id = $this->articles[0]->id;
         $this->delete('article/' . $id)
-            ->isOk();
+            ->assertStatus(Response::HTTP_OK);
         $this->assertDatabaseHas('articles', ['id' => $id])
             ->assertDatabaseMissing('articles', ['id' => $id, 'deleted_at' => null]);
     }
