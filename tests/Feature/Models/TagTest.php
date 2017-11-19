@@ -4,6 +4,7 @@ namespace Tests\Feature\Models;
 
 use App\Article;
 use App\Tag;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -15,11 +16,7 @@ class TagTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('articles')->truncate();
-        DB::table('tags')->truncate();
-        DB::table('article_tag_relations')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        Artisan::call('migrate:refresh');
     }
 
     public function testArticleRelation()
