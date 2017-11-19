@@ -10,6 +10,7 @@ class Article extends Model
     use SoftDeletes;
 
     protected $fillable = ['title', 'content', 'image_path'];
+    protected $hidden = ['pivot'];
 
     public function tags()
     {
