@@ -5,7 +5,6 @@ namespace Tests\Feature\Models;
 use App\Article;
 use App\Tag;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Tests\TestUtils\AssertRelation;
 
