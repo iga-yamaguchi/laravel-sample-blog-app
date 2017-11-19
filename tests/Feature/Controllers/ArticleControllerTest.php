@@ -33,6 +33,13 @@ class ArticleControllerTest extends TestCase
         $this->assertDatabaseHas('articles', $article->toArray());
     }
 
+    public function testShow()
+    {
+        $article = $this->articles[0];
+        $this->get('article/' . $article->id)
+            ->assertStatus(Response::HTTP_OK);
+    }
+
     public function testUpdate()
     {
         $article = factory(Article::class)->make();

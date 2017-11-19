@@ -43,7 +43,8 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $tags = Tag::all();
-        return view('article.show', compact('article', 'tags'));
+        $yearList = $this->articleRepository->yearList();
+        return view('article.show', compact('article', 'tags', 'yearList'));
     }
 
     public function edit(Article $article)
