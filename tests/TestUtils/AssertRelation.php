@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node\Expr\AssignOp\Mod;
 
-trait TestRelation
+trait AssertRelation
 {
     abstract public function assertEquals($expected, $actual, $message = '', $delta = 0, $maxDepth = 10, $canonicalize = false, $ignoreCase = false);
 

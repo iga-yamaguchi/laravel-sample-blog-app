@@ -7,11 +7,11 @@ use App\Tag;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-use Tests\TestUtils\TestRelation;
+use Tests\TestUtils\AssertRelation;
 
 class ArticleTest extends TestCase
 {
-    use TestRelation;
+    use AssertRelation;
 
     public function setUp()
     {
