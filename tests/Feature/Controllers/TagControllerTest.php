@@ -3,6 +3,7 @@
 namespace Tests\Feature\Controllers;
 
 use App\Tag;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -27,7 +28,7 @@ class TagControllerTest extends TestCase
         $tag = factory(Tag::class)->make();
 
         $this->post('tag', $tag->toArray())
-            ->isOk();
+            ->assertStatus(Response::HTTP_OK);
         $this->assertDatabaseHas('tags', $tag->toArray());
     }
 
@@ -35,7 +36,7 @@ class TagControllerTest extends TestCase
     {
         $tag = factory(Tag::class)->make();
         $this->put('tag/' . $this->tags[0]->id, $tag->toArray())
-            ->isOk();
+            ->assertStatus(Response::HTTP_OK);
 
         $this->assertDatabaseHas('tags', $tag->toArray());
     }
@@ -44,7 +45,7 @@ class TagControllerTest extends TestCase
     {
         $id = $this->tags[0]->id;
         $this->delete('tag/' . $id)
-            ->isOk();
+            ->assertStatus(Response::HTTP_OK);
         $this->assertDatabaseHas('tags', ['id' => $id])
             ->assertDatabaseMissing('tags', ['id' => $id, 'deleted_at' => null]);
     }
