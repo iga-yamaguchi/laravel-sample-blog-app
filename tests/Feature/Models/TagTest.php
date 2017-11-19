@@ -10,9 +10,12 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestUtils\TestRelation;
 
 class TagTest extends TestCase
 {
+    use TestRelation;
+
     public function setUp()
     {
         parent::setUp();
@@ -21,18 +24,6 @@ class TagTest extends TestCase
 
     public function testArticleRelation()
     {
-        $articles = factory(Article::class, 3)->create();
-        $tag    = factory(Tag::class)->create();
-
-        $ids = $articles->pluck('id');
-        $tag->articles()->attach($ids);
-
-        $this->assertEquals($articles->count(), $tag->articles->count());
-
-        foreach ($tag->articles as $key => $article) {
-            $articleArray = $articles[$key]->toArray();
-
-            $this->assertEquals($article->toArray(), $articleArray);
-        }
+        $this->assertRelation(Tag::class, Article::class, 'articles');
     }
 }

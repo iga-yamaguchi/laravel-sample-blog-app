@@ -7,9 +7,12 @@ use App\Tag;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
+use Tests\TestUtils\TestRelation;
 
 class ArticleTest extends TestCase
 {
+    use TestRelation;
+
     public function setUp()
     {
         parent::setUp();
@@ -18,19 +21,6 @@ class ArticleTest extends TestCase
 
     public function testTagRelation()
     {
-        $tags    = factory(Tag::class, 3)->create();
-        $article = factory(Article::class)->create();
-
-        $ids = $tags->pluck('id');
-        $article->tags()->attach($ids);
-
-        $this->assertEquals($tags->count(), $article->tags->count());
-
-        foreach ($article->tags as $key => $tag) {
-            $tagArray = $tags[$key]->toArray();
-
-            $this->assertEquals($tag->toArray(), $tagArray);
-        }
-
+        $this->assertRelation(Article::class, Tag::class, 'tags');
     }
 }
