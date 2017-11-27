@@ -30,9 +30,12 @@ $factory->define(App\Tag::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Article::class, function (Faker\Generator $faker) {
+    $image     = $faker->image(storage_path('uploads'));
+    $imagePath = substr($image, strlen(storage_path('uploads') . '/'));
+
     return [
         'title'      => $faker->title,
         'content'    => $faker->text(191),
-        'image_path' => $faker->imageUrl(),
+        'image_path' => $imagePath,
     ];
 });
