@@ -3,6 +3,7 @@
 namespace Tests\Feature\Controllers;
 
 use App\Article;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use Tests\TestCase;
@@ -18,9 +19,7 @@ class ArticleControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('articles')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        Artisan::call('migrate:refresh');
         $this->articles = factory(Article::class, 10)->create();
     }
 
