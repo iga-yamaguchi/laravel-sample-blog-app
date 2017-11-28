@@ -9,6 +9,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestUtils\SetupDirectory;
 
 class ArticleControllerTest extends TestCase
 {
@@ -21,6 +22,12 @@ class ArticleControllerTest extends TestCase
         DB::table('articles')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         $this->articles = factory(Article::class, 10)->create();
+    }
+
+    public function tearDown()
+    {
+        SetupDirectory::cleanUploads();
+        parent::tearDown();
     }
 
     public function testCreate()
