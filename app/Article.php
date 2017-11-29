@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -15,5 +16,16 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany('App\Tag', 'article_tag_relations', 'article_id', 'tag_id')->withTimestamps();
+    }
+
+    /**
+     * Get image path on web site.
+     *
+     * @param $imagePath
+     * @return mixed
+     */
+    public function getImagePathAttribute($imagePath)
+    {
+        return Storage::url('public/uploads/' . $imagePath);
     }
 }
