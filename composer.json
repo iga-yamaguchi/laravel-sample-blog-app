@@ -40,8 +40,8 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "ln -s storage public/storage",
-            "mkdir storage/uploads"
+            "ln -sf ${PWD}/storage public/storage",
+            "mkdir -p storage/uploads"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
