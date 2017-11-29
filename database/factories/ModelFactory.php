@@ -30,9 +30,14 @@ $factory->define(App\Tag::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Article::class, function (Faker\Generator $faker) {
+    $name = md5(uniqid(empty($_SERVER['SERVER_ADDR']) ? '' : $_SERVER['SERVER_ADDR'], true));
+    $nameWithExtension = $name . '.png';
+    $imageAbsolutePath = storage_path('uploads/' . $nameWithExtension);
+    copy(resource_path('assets/images/640x480.png'), $imageAbsolutePath);
+
     return [
         'title'      => $faker->title,
         'content'    => $faker->text(191),
-        'image_path' => $faker->imageUrl(),
+        'image_path' => $nameWithExtension,
     ];
 });
