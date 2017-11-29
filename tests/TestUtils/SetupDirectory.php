@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: igatea
- * Date: 17/11/28
- * Time: 14:53
- */
-
 namespace Tests\TestUtils;
-
 
 class SetupDirectory
 {
