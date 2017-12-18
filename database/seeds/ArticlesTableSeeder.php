@@ -14,13 +14,8 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('articles')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-        factory(Article::class, 10)->create()->each(function ($article) {
+        factory(Article::class, 15)->create()->each(function ($article) {
             $article->tags()->save(factory(Tag::class)->make());
-
         });
     }
 }
