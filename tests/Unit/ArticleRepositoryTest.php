@@ -32,6 +32,7 @@ class ArticleRepositoryTest extends TestCase
         $this->repository = new ArticleRepository(new Article());
     }
 
+    # TODO: Sometime the ids is different for some reason.
     public function testAll()
     {
         $articleCollections = $this->repository->all();
@@ -52,5 +53,20 @@ class ArticleRepositoryTest extends TestCase
         foreach ($createdArticle->attributesToArray() as $key => $value) {
             $this->assertEquals($value, $article[$key]);
         }
+    }
+
+    public function testUpdate()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testShowByYear()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testYearList()
+    {
+        $this->markTestIncomplete();
     }
 }
