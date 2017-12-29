@@ -10,8 +10,8 @@ class Article extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'content', 'image_path'];
-    protected $hidden = ['pivot', 'deleted_at'];
+    protected $fillable = ['title', 'content', 'image_path', 'absolute_image_path'];
+    protected $hidden = ['pivot', 'deleted_at', 'image_path'];
 
     public function tags()
     {
@@ -24,7 +24,8 @@ class Article extends Model
      * @param $imagePath
      * @return mixed
      */
-    public function getImagePathAttribute($imagePath)
+//    public function getAbsoluteImagePathAttribute($imagePath)
+    public function getAAttribute($imagePath)
     {
         return Storage::url('public/uploads/' . $imagePath);
     }
