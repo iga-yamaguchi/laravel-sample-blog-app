@@ -35,7 +35,8 @@ class ArticleController extends Controller
 
     public function store(ArticleRequest $request)
     {
-        $article = $this->articleRepository->create($request);
+        $tag_ids = $request->exists('tag_id') ? $request->input('tag_id') : [];
+        $article = $this->articleRepository->create($request->all(), $tag_ids);
 
         return view('article.store', ['title' => $article->title]);
     }

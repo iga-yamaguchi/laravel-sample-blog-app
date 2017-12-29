@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Article;
@@ -19,12 +20,12 @@ class ArticleRepository
         return $this->article->orderby('created_at', 'desc')->get();
     }
 
-    public function create($request)
+    public function create(array $args, array $tags)
     {
-        $article = $this->article->create($request->all());
+        $article = $this->article->create($args);
 
-        DB::transaction(function () use ($article, $request) {
-            $tag_ids = $request->exists('tag_id') ? $request->input('tag_id') : [];
+        DB::transaction(function () use ($article, $tags) {
+            $tag_ids = count($tags) > 0 ? $tags : [];
             $article->tags()->sync($tag_ids);
         });
 

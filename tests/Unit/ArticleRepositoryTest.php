@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Article;
 use App\Repositories\ArticleRepository;
+use App\Tag;
 use Doctrine\DBAL\Schema\Schema;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Artisan;
@@ -38,6 +39,18 @@ class ArticleRepositoryTest extends TestCase
         foreach ($articleCollections as $key => $article) {
             /** @var $article Article */
             $this->assertEquals($this->articles[$key]->id, $article->id);
+        }
+    }
+
+    public function testCreate()
+    {
+        $createdArticle = factory(Article::class)->make();
+        /** @var Collection $tagIds */
+        $tags    = factory(Tag::class, 10)->create();
+        $article = $this->repository->create($createdArticle->toArray(), $tags->pluck('id')->toArray());
+
+        foreach ($createdArticle->attributesToArray() as $key => $value) {
+            $this->assertEquals($value, $article[$key]);
         }
     }
 }
