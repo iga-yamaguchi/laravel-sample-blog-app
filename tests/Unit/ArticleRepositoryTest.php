@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Article;
 use App\Repositories\ArticleRepository;
 use Doctrine\DBAL\Schema\Schema;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -13,14 +14,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ArticleRepositoryTest extends TestCase
 {
     /**
-     * @var array
+     * @var Collection
      */
-    protected $articleArray;
-
-    /**
-     * @var Article
-     */
-    protected $article;
+    protected $articles;
 
     /**
      * @var ArticleRepository
@@ -31,25 +27,17 @@ class ArticleRepositoryTest extends TestCase
     {
         parent::setUp();
         Artisan::call('migrate:refresh');
-
-        $this->articleArray = [
-            'title'      => 'Title1',
-            'content'    => 'Content1',
-            'image_path' => 'Image path1',
-        ];
-
-        Article::create($this->articleArray);
-
-        $this->article    = new Article();
-        $this->repository = new ArticleRepository($this->article);
+        $this->articles   = factory(Article::class, 10)->create();
+        $this->repository = new ArticleRepository(new Article());
     }
 
     public function testAll()
     {
         $articleCollections = $this->repository->all();
 
-//        echo 'image: ' . $articleCollections[0]->absolute_image_path;
-        echo 'image: ' . $articleCollections[0]->a;
-        $this->assertEquals([$this->articleArray], $articleCollections->toArray());
+        foreach ($articleCollections as $key => $article) {
+            /** @var $article Article */
+            $this->assertEquals($this->articles[$key]->id, $article->id);
+        }
     }
 }
