@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Http\Requests\TagRequest;
 use App\Repositories\ArticleRepository;
+use App\Repositories\TagRepository;
 use App\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    private $tagRepository;
     private $articleRepository;
 
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(TagRepository $tagRepository, ArticleRepository $articleRepository)
     {
+        $this->tagRepository     = $tagRepository;
         $this->articleRepository = $articleRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -79,7 +83,7 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  TagRequest $request
-     * @param  \App\Tag                 $tag
+     * @param  \App\Tag $tag
      * @return \Illuminate\Http\Response
      */
     public function update(TagRequest $request, Tag $tag)
