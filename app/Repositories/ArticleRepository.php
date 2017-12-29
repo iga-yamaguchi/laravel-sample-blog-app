@@ -20,9 +20,9 @@ class ArticleRepository
         return $this->article->orderby('created_at', 'desc')->get();
     }
 
-    public function create(array $args, array $tags)
+    public function create(array $data, array $tags)
     {
-        $article = $this->article->create($args);
+        $article = $this->article->create($data);
 
         DB::transaction(function () use ($article, $tags) {
             $tag_ids = count($tags) > 0 ? $tags : [];
@@ -32,7 +32,7 @@ class ArticleRepository
         return $article;
     }
 
-    public function update($id, $data)
+    public function update($id, array $data)
     {
         $article = $this->article->find($id);
 
