@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Http\Requests\TagRequest;
 use App\Repositories\ArticleRepository;
+use App\Repositories\ArticleRepositoryInterface;
 use App\Repositories\TagRepository;
+use App\Repositories\TagRepositoryInterface;
 use App\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    /** @var TagRepositoryInterface */
     private $tagRepository;
+
+    /** @var ArticleRepositoryInterface */
     private $articleRepository;
 
-    public function __construct(TagRepository $tagRepository, ArticleRepository $articleRepository)
+    public function __construct(TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository)
     {
         $this->tagRepository     = $tagRepository;
         $this->articleRepository = $articleRepository;

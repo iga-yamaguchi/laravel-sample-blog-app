@@ -5,7 +5,7 @@ namespace App\Repositories;
 
 use App\Tag;
 
-class TagRepository
+class TagRepository implements TagRepositoryInterface
 {
     private $tag;
 
