@@ -180,6 +180,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        App\Providers\ArticleRepositoryServiceProvider::class
     ],
 
     /*
