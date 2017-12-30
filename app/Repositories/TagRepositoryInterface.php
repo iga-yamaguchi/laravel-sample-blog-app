@@ -21,5 +21,5 @@ interface TagRepositoryInterface
 
     function update(Tag $tag, array $data);
 
-    function delete(string $id);
+    function delete(Tag $tag);
 }

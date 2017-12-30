@@ -63,7 +63,7 @@ class TagRepositoryTest extends TestCase
     public function testDelete()
     {
         $tag = factory(Tag::class)->create();
-        $this->repository->delete($tag->id);
+        $this->repository->delete($tag);
         $this->assertNull(Tag::find($tag->id));
     }
 }

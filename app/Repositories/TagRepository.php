@@ -39,9 +39,8 @@ class TagRepository implements TagRepositoryInterface
         return $tag->update($data);
     }
 
-    function delete(string $id)
+    function delete(Tag $tag)
     {
-        $tag = $this->tag->find($id);
         return $tag->delete();
     }
 }

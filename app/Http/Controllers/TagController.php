@@ -105,7 +105,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        $this->tagRepository->delete($tag->id);
+        $this->tagRepository->delete($tag);
         return view('tag.destroy', ['name' => $tag->name]);
     }
 }
