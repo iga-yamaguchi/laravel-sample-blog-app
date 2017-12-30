@@ -27,7 +27,7 @@ class ArticleRepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(ArticleRepositoryInterface::class, function ($app) {
-            return new ArticleRepository(new Article());
+            return new ArticleRepository();
         });
     }
 }

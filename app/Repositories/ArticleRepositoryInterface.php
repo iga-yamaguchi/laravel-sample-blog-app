@@ -2,13 +2,19 @@
 
 namespace App\Repositories;
 
+use App\Article;
+
 interface ArticleRepositoryInterface
 {
     function all();
 
     function create(array $data, array $tags);
 
-    function update(int $id, array $data);
+    function update(Article $article, array $data);
+
+    function find(int $id);
+
+    function delete(Article $article);
 
     function showByYear($year);
 

@@ -57,13 +57,27 @@ class ArticleRepositoryTest extends TestCase
 
     public function testUpdate()
     {
-        $article = $this->articles[0];
-        $updateData = factory(Article::class)->make();
-        $updatedArticle = $this->repository->update($article->id, $updateData->toArray());
+        $article        = $this->articles[0];
+        $updateData     = factory(Article::class)->make();
+        $updatedArticle = $this->repository->update($article, $updateData->toArray());
 
         foreach ($updateData->attributesToArray() as $key => $value) {
             $this->assertEquals($value, $updatedArticle[$key]);
         }
+    }
+
+    public function testFind()
+    {
+        $article       = $this->articles[0];
+        $findedArticle = $this->repository->find($article->id);
+        $this->assertEquals($article->id, $findedArticle->id);
+    }
+
+    public function testDelete()
+    {
+        $article = $this->articles[0];
+        $this->repository->delete($article);
+        $this->assertNull(Article::find($article->id));
     }
 
     public function testShowByYear()
