@@ -9,7 +9,17 @@
 namespace App\Repositories;
 
 
+use App\Tag;
+
 interface TagRepositoryInterface
 {
+    function withGet();
+
+    function create(array $data);
+
     function all();
+
+    function update(Tag $tag, array $data);
+
+    function delete(string $id);
 }

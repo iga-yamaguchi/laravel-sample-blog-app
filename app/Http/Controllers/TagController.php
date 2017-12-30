@@ -32,7 +32,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::with('articles')->get();
+        $tags = $this->tagRepository->withGet();
         return view('tag.index', compact('tags'));
     }
 
@@ -67,7 +67,7 @@ class TagController extends Controller
     public function show(Tag $tag)
     {
         $articles = $tag->articles;
-        $tags     = $tag->all();
+        $tags     = $this->tagRepository->all();
         $yearList = $this->articleRepository->yearList();
 
         return view('article.index', compact('articles', 'tags', 'yearList'));
@@ -93,7 +93,7 @@ class TagController extends Controller
      */
     public function update(TagRequest $request, Tag $tag)
     {
-        $tag->update($request->all());
+        $this->tagRepository->update($tag, $request->all());
         return view('tag.update', ['name' => $tag->name]);
     }
 
@@ -105,7 +105,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        $tag->delete();
+        $this->tagRepository->delete($tag->id);
         return view('tag.destroy', ['name' => $tag->name]);
     }
 }
