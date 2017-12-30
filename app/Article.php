@@ -24,8 +24,8 @@ class Article extends Model
      * @param $imagePath
      * @return mixed
      */
-    public function getImagePathAttribute($imagePath)
+    public function getAbsoluteImagePathAttribute()
     {
-        return Storage::url('public/uploads/' . $imagePath);
+        return Storage::url('public/uploads/' . $this->image_path);
     }
 }

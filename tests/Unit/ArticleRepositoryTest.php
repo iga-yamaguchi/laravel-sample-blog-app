@@ -45,6 +45,7 @@ class ArticleRepositoryTest extends TestCase
 
     public function testCreate()
     {
+        /** @var Article $createdArticle */
         $createdArticle = factory(Article::class)->make();
         /** @var Collection $tagIds */
         $tags    = factory(Tag::class, 10)->create();
