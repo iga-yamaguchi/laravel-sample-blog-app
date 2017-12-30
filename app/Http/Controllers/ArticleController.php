@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Http\Requests\ArticleRequest;
 use App\Repositories\ArticleRepository;
+use App\Repositories\ArticleRepositoryInterface;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
+    /** @var ArticleRepositoryInterface */
     private $articleRepository;
 
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(ArticleRepositoryInterface $articleRepository)
     {
         $this->articleRepository = $articleRepository;
     }

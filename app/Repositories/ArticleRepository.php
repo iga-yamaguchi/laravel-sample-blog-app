@@ -6,7 +6,7 @@ use App\Article;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class ArticleRepository
+class ArticleRepository implements ArticleRepositoryInterface
 {
     private $article;
 
@@ -32,7 +32,7 @@ class ArticleRepository
         return $article;
     }
 
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         $article = $this->article->find($id);
 
