@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Http\Requests\ArticleRequest;
-use App\Repositories\ArticleRepository;
+use App\Repositories\ArticleRepositoryInterface;
 use App\Tag;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
+    /** @var ArticleRepositoryInterface */
     private $articleRepository;
 
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(ArticleRepositoryInterface $articleRepository)
     {
         $this->articleRepository = $articleRepository;
     }
@@ -35,15 +34,17 @@ class ArticleController extends Controller
 
     public function store(ArticleRequest $request)
     {
-        $article = $this->articleRepository->create($request);
+        $tag_ids = $request->exists('tag_id') ? $request->input('tag_id') : [];
+        $article = $this->articleRepository->create($request->all(), $tag_ids);
 
         return view('article.store', ['title' => $article->title]);
     }
 
-    public function show(Article $article)
+    public function show(int $id)
     {
-        $tags = Tag::all();
+        $article = $this->articleRepository->find($id);
         $yearList = $this->articleRepository->yearList();
+        $tags = Tag::all();
         return view('article.show', compact('article', 'tags', 'yearList'));
     }
 
@@ -63,14 +64,14 @@ class ArticleController extends Controller
         }
 
         $input['image_path'] = basename($filename);
-        $article = $this->articleRepository->update($article->id, $input);
+        $article = $this->articleRepository->update($article, $input);
 
         return view('article.update', ['title' => $article->title]);
     }
 
     public function destroy(Article $article)
     {
-        $article->delete();
+        $this->articleRepository->delete($article);
         return view('article.destroy', ['title' => $article->title]);
 
     }

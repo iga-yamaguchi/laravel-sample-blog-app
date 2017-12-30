@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="thumbnail">
-                    <a href="{{ route('article.show', $article) }}"><img src="{{ $article->image_path }}" alt="..."></a>
+                    <a href="{{ route('article.show', $article) }}"><img src="{{ $article->absolute_image_path }}" alt="..."></a>
                     <div class="caption">
                         <a href="{{ route('article.show', $article) }}"><h3>{{ $article->title }}</h3></a>
                         @foreach($article->tags as $tag)

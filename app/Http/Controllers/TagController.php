@@ -5,17 +5,26 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Http\Requests\TagRequest;
 use App\Repositories\ArticleRepository;
+use App\Repositories\ArticleRepositoryInterface;
+use App\Repositories\TagRepository;
+use App\Repositories\TagRepositoryInterface;
 use App\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    /** @var TagRepositoryInterface */
+    private $tagRepository;
+
+    /** @var ArticleRepositoryInterface */
     private $articleRepository;
 
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository)
     {
+        $this->tagRepository     = $tagRepository;
         $this->articleRepository = $articleRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +32,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::with('articles')->get();
+        $tags = $this->tagRepository->withGet();
         return view('tag.index', compact('tags'));
     }
 
@@ -58,7 +67,7 @@ class TagController extends Controller
     public function show(Tag $tag)
     {
         $articles = $tag->articles;
-        $tags     = $tag->all();
+        $tags     = $this->tagRepository->all();
         $yearList = $this->articleRepository->yearList();
 
         return view('article.index', compact('articles', 'tags', 'yearList'));
@@ -79,12 +88,12 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  TagRequest $request
-     * @param  \App\Tag                 $tag
+     * @param  \App\Tag $tag
      * @return \Illuminate\Http\Response
      */
     public function update(TagRequest $request, Tag $tag)
     {
-        $tag->update($request->all());
+        $this->tagRepository->update($tag, $request->all());
         return view('tag.update', ['name' => $tag->name]);
     }
 
@@ -96,7 +105,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        $tag->delete();
+        $this->tagRepository->delete($tag);
         return view('tag.destroy', ['name' => $tag->name]);
     }
 }
