@@ -30,6 +30,7 @@ class HomeController extends Controller
 
     public function edit()
     {
-        return view('auth.edit');
+        $user = Auth::user();
+        return view('auth.edit', compact('user'));
     }
 }
