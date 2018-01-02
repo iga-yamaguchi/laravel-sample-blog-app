@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -32,5 +33,18 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         return view('auth.edit', compact('user'));
+    }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+
+        $user->user_id = $request->input('user_id');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        $user->save();
+
+        return Redirect::route('home');
     }
 }

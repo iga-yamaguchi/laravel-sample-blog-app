@@ -20,3 +20,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('home/edit', 'HomeController@edit')->name('user.edit');
+Route::put('home/edit', 'HomeController@update')->name('user.update');
