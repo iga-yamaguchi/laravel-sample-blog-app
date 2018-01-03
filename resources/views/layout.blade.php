@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel Sample Blog App</title>
-    <link rel="stylesheet" type="text/css" href="/css/app.css">
-    <script src="/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 </head>
 <body>
 <header>
@@ -102,5 +101,6 @@
         <div class="panel-footer">copyright</div>
     </div>
 </footer>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
 </body>
 </html>
