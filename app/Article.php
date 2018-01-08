@@ -18,6 +18,11 @@ class Article extends Model
         return $this->belongsToMany('App\Tag', 'article_tag_relations', 'article_id', 'tag_id')->withTimestamps();
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     /**
      * Get image path on web site.
      *
