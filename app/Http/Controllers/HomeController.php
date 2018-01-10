@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 
 class HomeController extends Controller
 {
@@ -39,9 +40,19 @@ class HomeController extends Controller
     {
         $user = $request->user();
 
+        $this->validate($request, [
+            'user_id'  => ['required', 'string', 'max:255',
+                'unique' => Rule::unique('users')->ignore($user->id),
+            ],
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'string', 'email', 'max:255',
+                'unique:users' => Rule::unique('users')->ignore($user->id),
+            ],
+        ]);
+
         $user->user_id = $request->input('user_id');
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
+        $user->name    = $request->input('name');
+        $user->email   = $request->input('email');
 
         $user->save();
 
