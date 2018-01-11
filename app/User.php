@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Article');
     }
+
+    public function getLatestArticlesAttribute()
+    {
+        return $this->articles()->orderBy('created_at')->limit(5)->get();
+    }
 }

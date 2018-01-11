@@ -17,6 +17,8 @@ class UserTest extends TestCase
     public function testArticleInUserPage()
     {
         $user = factory(User::class)->create();
+        $user->articles()->saveMany(factory(Article::class, 10)->make());
+        $this->assertEquals(5, $user->latestArticles->count());
     }
 
     public function testArticleRelation()
