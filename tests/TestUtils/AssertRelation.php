@@ -17,6 +17,35 @@ trait AssertRelation
      * @param string $relationClassName
      * @param string $relationAttributeName
      */
+    public function assertHasMany(string $sourceClassName, string $relationClassName, string $relationAttributeName)
+    {
+        /** @var Collection $relationTargets */
+        $relationTargets = factory($relationClassName, 3)->create();
+        /** @var Model $source */
+        $source = factory($sourceClassName)->create();
+
+        $source->$relationAttributeName()->saveMany($relationTargets);
+
+        $this->assertEquals($relationTargets->count(), $source->$relationAttributeName->count());
+
+        /**
+         * @var int   $key
+         * @var Model $relation
+         */
+        foreach ($source->$relationAttributeName as $key => $relation) {
+            $args = $relationTargets[$key]->toArray();
+
+            $this->assertEquals($relation->toArray(), $args);
+        }
+    }
+
+    /**
+     * Assert a model relation.
+     *
+     * @param string $sourceClassName
+     * @param string $relationClassName
+     * @param string $relationAttributeName
+     */
     public function assertBelongsToMany(string $sourceClassName, string $relationClassName, string $relationAttributeName)
     {
         /** @var Collection $relationTargets */
