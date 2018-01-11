@@ -18,6 +18,7 @@ Route::get('article/year/{article}', 'ArticleController@year')->name('article.ye
 Route::resource('tag', 'TagController');
 Auth::routes();
 
+Route::get('user/{user}', 'UserController@show')->name('user.show');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('home/edit', 'HomeController@edit')->name('user.edit');
 Route::put('home/edit', 'HomeController@update')->name('user.update');

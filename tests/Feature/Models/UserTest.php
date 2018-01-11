@@ -14,6 +14,11 @@ class UserTest extends TestCase
 {
     use AssertRelation;
 
+    public function testArticleInUserPage()
+    {
+        $user = factory(User::class)->create();
+    }
+
     public function testArticleRelation()
     {
         $this->assertHasMany(User::class, Article::class, 'articles');
