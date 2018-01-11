@@ -23,7 +23,6 @@ class ArticlesTableSeeder extends Seeder
             /** @var Article $article */
             $article->tags()->save(factory(Tag::class)->make());
             $user = User::inRandomOrder()->first();
-            var_dump($user->toArray());
             $article->user()->associate($user);
             $article->save();
         });
