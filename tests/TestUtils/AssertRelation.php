@@ -5,7 +5,6 @@ namespace Tests\TestUtils;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use PhpParser\Node\Expr\AssignOp\Mod;
 
 trait AssertRelation
 {
@@ -59,6 +58,6 @@ trait AssertRelation
         $source->$relationAttributeName()->associate($relationTarget);
         $source->save();
 
-        $this->assertEquals($relationTarget->toArray(), $source->$relationAttributeName->toArray());
+        $this->assertTrue($relationTarget->is($source->$relationAttributeName));
     }
 }

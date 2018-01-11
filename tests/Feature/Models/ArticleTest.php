@@ -35,4 +35,17 @@ class ArticleTest extends TestCase
     {
         $this->assertBelongsTo(Article::class, User::class, 'user');
     }
+
+    public function testIs()
+    {
+        /** @var Article $article1 */
+        $article1 = factory(Article::class)->create();
+        /** @var Article $article2 */
+        $article2 = factory(Article::class)->create();
+
+        $article11 = Article::find($article1->id);
+
+        $this->assertTrue($article1->is($article11));
+        $this->assertFalse($article1->is($article2));
+    }
 }
