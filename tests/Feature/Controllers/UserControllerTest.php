@@ -19,7 +19,7 @@ class UserControllerTest extends TestCase
 
         $this->get('user/' . $user->name)
             ->assertStatus(Response::HTTP_OK)
-            ->assertViewIs('home')
+            ->assertViewIs('user.show')
             ->assertViewHas('user', $user);
     }
 }
