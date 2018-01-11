@@ -27,6 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * The attiribute that is used to display the latest article.
+     *
+     * @var int
+     */
+    protected $latest_article_limit = 5;
+
     public function getRouteKeyName()
     {
         return 'name';
@@ -37,8 +44,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Article');
     }
 
+    public function getLatestArticleLimitAttribute()
+    {
+        return $this->latest_article_limit;
+    }
+
     public function getLatestArticlesAttribute()
     {
-        return $this->articles()->orderBy('created_at')->limit(5)->get();
+        return $this->articles()->orderBy('created_at')->limit($this->latest_article_limit)->get();
     }
 }
