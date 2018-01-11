@@ -17,7 +17,7 @@ class UserControllerTest extends TestCase
         $user = factory(User::class)->create();
         $user->wasRecentlyCreated = false;
 
-        $this->get('user/' . $user->name)
+        $this->get('user/' . $user->user_id)
             ->assertStatus(Response::HTTP_OK)
             ->assertViewIs('user.show')
             ->assertViewHas('user', $user);
