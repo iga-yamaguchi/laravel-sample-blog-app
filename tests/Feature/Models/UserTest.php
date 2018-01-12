@@ -27,4 +27,9 @@ class UserTest extends TestCase
     {
         $this->assertHasMany(User::class, Article::class, 'articles');
     }
+
+    public function testIsSameAuthUserAttribute()
+    {
+
+    }
 }
