@@ -7,26 +7,19 @@ use App\Tag;
 
 class TagRepository implements TagRepositoryInterface
 {
-    private $tag;
-
-    public function __construct(Tag $tag)
-    {
-        $this->tag = $tag;
-    }
-
     public function withGet()
     {
-        return $this->tag->with('articles')->get();
+        return Tag::with('articles')->get();
     }
 
     public function create(array $data)
     {
-        return $this->tag->create($data);
+        return Tag::create($data);
     }
 
     public function all()
     {
-        return $this->tag->all();
+        return Tag::all();
     }
 
     /**

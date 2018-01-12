@@ -24,22 +24,27 @@ class ArticleRepositoryTest extends TestCase
      */
     protected $repository;
 
+    /**
+     * The attribute that is number of article factory
+     * @var int
+     */
+    private $articleCount = 10;
+
     public function setUp()
     {
         parent::setUp();
         Artisan::call('migrate:refresh');
-        $this->articles   = factory(Article::class, 10)->create();
-        $this->repository = new ArticleRepository(new Article());
+        $this->articles   = factory(Article::class, $this->articleCount)->create();
+        $this->repository = new ArticleRepository();
     }
 
-    # TODO: Sometime the ids is different for some reason.
     public function testAll()
     {
         $articleCollections = $this->repository->all();
+        $this->assertEquals($this->articleCount, $articleCollections->count());
 
-        foreach ($articleCollections as $key => $article) {
-            /** @var $article Article */
-            $this->assertEquals($this->articles[$key]->id, $article->id);
+        foreach ($this->articles as $article) {
+            $this->assertTrue($articleCollections->contains($article));
         }
     }
 
