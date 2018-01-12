@@ -27,6 +27,6 @@ class TagTest extends TestCase
 
     public function testArticleRelation()
     {
-        $this->assertRelation(Tag::class, Article::class, 'articles');
+        $this->assertBelongsToMany(Tag::class, Article::class, 'articles');
     }
 }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'user_id', 'name', 'email', 'password',
     ];
 
     /**
@@ -26,4 +27,41 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The attiribute that is used to display the latest article.
+     *
+     * @var int
+     */
+    protected $latest_article_limit = 5;
+
+    public function getRouteKeyName()
+    {
+        return 'user_id';
+    }
+
+    public function articles()
+    {
+        return $this->hasMany('App\Article');
+    }
+
+    public function getCreatedAtAttribute($createdAt)
+    {
+        return date('Y-m-d', strtotime($createdAt));
+    }
+
+    public function getLatestArticleLimitAttribute()
+    {
+        return $this->latest_article_limit;
+    }
+
+    public function getLatestArticlesAttribute()
+    {
+        return $this->articles()->orderBy('created_at')->limit($this->latest_article_limit)->get();
+    }
+
+    public function getIsSameAuthUserAttribute()
+    {
+        return Auth::check() && $this->is(Auth::user());
+    }
 }
