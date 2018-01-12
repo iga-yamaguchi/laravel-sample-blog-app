@@ -24,6 +24,10 @@ class ArticleRepositoryTest extends TestCase
      */
     protected $repository;
 
+    /**
+     * The attribute that is number of article factory
+     * @var int
+     */
     private $articleCount = 10;
 
     public function setUp()

@@ -18,17 +18,24 @@ class TagRepositoryTest extends TestCase
     /** @var TagRepository */
     private $repository;
 
+    /**
+     * The attribute that is number of tag factory
+     * @var int
+     */
+    private $tagCount = 10;
+
     public function setUp()
     {
         parent::setUp();
         Artisan::call('migrate:refresh');
-        $this->tags       = factory(Tag::class, 10)->create();
+        $this->tags       = factory(Tag::class, $this->tagCount)->create();
         $this->repository = new TagRepository(new Tag());
     }
 
     public function testAll()
     {
         $tags = $this->repository->withGet();
+        $this->assertEquals($this->tagCount, $tags->count());
 
         foreach ($this->tags as $key => $tag) {
             $this->assertEquals($tag->id, $tags[$key]->id);
@@ -51,11 +58,11 @@ class TagRepositoryTest extends TestCase
     public function testUpdate()
     {
         /** @var Tag $tag */
-        $tag = factory(Tag::class)->create();
+        $tag       = factory(Tag::class)->create();
         $updateTag = factory(Tag::class)->make();
         $this->repository->update($tag, $updateTag->toArray());
 
-        foreach ($updateTag->attributesToArray() as $key => $value){
+        foreach ($updateTag->attributesToArray() as $key => $value) {
             $this->assertEquals($value, $tag[$key]);
         }
     }
