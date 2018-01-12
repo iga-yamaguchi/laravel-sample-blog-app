@@ -29,7 +29,7 @@ class TagRepositoryTest extends TestCase
         parent::setUp();
         Artisan::call('migrate:refresh');
         $this->tags       = factory(Tag::class, $this->tagCount)->create();
-        $this->repository = new TagRepository(new Tag());
+        $this->repository = new TagRepository();
     }
 
     public function testAll()
