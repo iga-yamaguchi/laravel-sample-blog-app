@@ -10,7 +10,7 @@
                         @foreach($article->tags as $tag)
                             <a href="{{ route('tag.show', $tag) }}"><span class="label label-info">{{ $tag->name }}</span></a>
                         @endforeach
-                        <p class="text-success">by {{ $article->user->name }}</p>
+                        <p class="text-success">by <a href="{{ route('user.show', $article->user->user_id) }}">{{ $article->user->name }}</a></p>
                         <p class="text-primary">{{ $article->created_at }}</p>
                         <p class="lead">{{ $article->content }}</p>
                         <p class="text-right"><a href="{{ route('article.show', $article) }}" class="btn btn-default" role="button">More</a></p>

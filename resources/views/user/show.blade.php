@@ -1,7 +1,7 @@
 @extends('one-column')
 @section('main')
-    <h3>{{ $user->name }}</h3>
-    <p>{{ $user->user_id }}</p>
+    <h3>{{ $user->name }} ( {{ $user->user_id }} )</h3>
+    <p>Registration date : {{ $user->created_at }}</p>
     @foreach($user->latest_articles as $article)
         <div class="row">
             <div class="col-sm-12">
@@ -12,7 +12,6 @@
                         @foreach($article->tags as $tag)
                             <a href="{{ route('tag.show', $tag) }}"><span class="label label-info">{{ $tag->name }}</span></a>
                         @endforeach
-                        <p class="text-success">by {{ $article->user->name }}</p>
                         <p class="text-primary">{{ $article->created_at }}</p>
                         <p class="lead">{{ $article->content }}</p>
                         <p class="text-right"><a href="{{ route('article.show', $article) }}" class="btn btn-default" role="button">More</a></p>

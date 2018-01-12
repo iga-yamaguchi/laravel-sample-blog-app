@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Article');
     }
 
+    public function getCreatedAtAttribute($createdAt)
+    {
+        return date('Y-m-d', strtotime($createdAt));
+    }
+
     public function getLatestArticleLimitAttribute()
     {
         return $this->latest_article_limit;
