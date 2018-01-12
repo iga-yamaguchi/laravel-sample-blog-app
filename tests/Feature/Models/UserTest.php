@@ -4,6 +4,7 @@ namespace Tests\Feature\Models;
 
 use App\Article;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -30,6 +31,11 @@ class UserTest extends TestCase
 
     public function testIsSameAuthUserAttribute()
     {
+        $loginUser    = factory(User::class)->create();
+        $this->actingAs($loginUser);
+        $this->assertTrue($loginUser->is_same_auth_user);
 
+        $nonLoginUser = factory(User::class)->create();
+        $this->assertFalse($nonLoginUser->is_same_auth_user);
     }
 }
