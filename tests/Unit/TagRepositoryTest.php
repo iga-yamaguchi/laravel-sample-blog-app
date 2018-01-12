@@ -37,8 +37,8 @@ class TagRepositoryTest extends TestCase
         $tags = $this->repository->withGet();
         $this->assertEquals($this->tagCount, $tags->count());
 
-        foreach ($this->tags as $key => $tag) {
-            $this->assertEquals($tag->id, $tags[$key]->id);
+        foreach ($this->tags as $tag) {
+            $this->assertTrue($tags->contains($tag));
         }
     }
 
