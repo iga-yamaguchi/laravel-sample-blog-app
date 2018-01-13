@@ -33,4 +33,31 @@ class Article extends Model
     {
         return Storage::url('public/uploads/' . $this->image_path);
     }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithTags($query)
+    {
+        return $query->with([
+            'tags' => function ($query) {
+                /** @var \Illuminate\Database\Eloquent\Builder $query */
+                $query->select('name');
+            }]);
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithUser($query)
+    {
+        return $query->with([
+            'user' => function ($query) {
+                /** @var \Illuminate\Database\Eloquent\Builder $query */
+                $query->select('id', 'name', 'user_id');
+            },
+        ]);
+    }
 }

@@ -8,12 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
+    protected $columns = ['id', 'title', 'content', 'image_path', 'created_at', 'user_id'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function all()
     {
-        return Article::orderBy('created_at', 'desc')->get();
+        return Article::withTags()
+            ->withUser()
+            ->orderBy('created_at', 'desc')
+            ->get($this->columns);
     }
 
     public function create(array $data, array $tags)
@@ -41,7 +46,12 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function find(int $id)
     {
-        return Article::find($id);
+        return Article::withTags()->find($id, $this->columns);
+    }
+
+    public function findOrFail(int $id)
+    {
+        return Article::withTags()->findOrFail($id, $this->columns);
     }
 
     public function delete(Article $article)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Http\Requests\ArticleRequest;
 use App\Repositories\ArticleRepositoryInterface;
+use App\Repositories\TagRepositoryInterface;
 use App\Tag;
 
 class ArticleController extends Controller
@@ -12,15 +13,19 @@ class ArticleController extends Controller
     /** @var ArticleRepositoryInterface */
     private $articleRepository;
 
-    public function __construct(ArticleRepositoryInterface $articleRepository)
+    /** @var TagRepositoryInterface */
+    private $tagRepository;
+
+    public function __construct(ArticleRepositoryInterface $articleRepository, TagRepositoryInterface $tagRepository)
     {
         $this->articleRepository = $articleRepository;
+        $this->tagRepository     = $tagRepository;
     }
 
     public function index()
     {
         $articles = $this->articleRepository->all();
-        $tags     = Tag::all();
+        $tags     = $this->tagRepository->all();
         $yearList = $this->articleRepository->yearList();
 
         return view('article.index', compact('articles', 'tags', 'yearList'));
@@ -28,7 +33,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $tags = Tag::all();
+        $tags = $this->tagRepository->all();
         return view('article.create', compact('tags'));
     }
 
@@ -42,16 +47,17 @@ class ArticleController extends Controller
 
     public function show(int $id)
     {
-        $article = $this->articleRepository->find($id);
+        $article  = $this->articleRepository->findOrFail($id);
         $yearList = $this->articleRepository->yearList();
-        $tags = Tag::all();
+        $tags     = $this->tagRepository->all();
         return view('article.show', compact('article', 'tags', 'yearList'));
     }
 
-    public function edit(Article $article)
+    public function edit(int $id)
     {
-        $tags = Tag::all();
-        return view('article.create', compact('article', 'tags'));
+        $article = $this->articleRepository->findOrFail($id);
+        $tags = $this->tagRepository->all();
+        return view('article.edit', compact('article', 'tags'));
     }
 
     public function update(ArticleRequest $request, Article $article)
@@ -64,7 +70,7 @@ class ArticleController extends Controller
         }
 
         $input['image_path'] = basename($filename);
-        $article = $this->articleRepository->update($article, $input);
+        $article             = $this->articleRepository->update($article, $input);
 
         return view('article.update', ['title' => $article->title]);
     }
@@ -79,7 +85,7 @@ class ArticleController extends Controller
     public function year($year)
     {
         $articles = $this->articleRepository->showByYear($year);
-        $tags = Tag::all();
+        $tags     = Tag::all();
         $yearList = $this->articleRepository->yearList();
 
         return view('article.index', compact('articles', 'tags', 'yearList'));
