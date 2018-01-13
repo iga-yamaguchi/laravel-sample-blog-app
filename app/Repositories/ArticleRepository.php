@@ -13,7 +13,17 @@ class ArticleRepository implements ArticleRepositoryInterface
      */
     public function all()
     {
-        return Article::orderBy('created_at', 'desc')->get();
+        return Article::with([
+            'tags' => function ($query) {
+                /** @var \Illuminate\Database\Eloquent\Builder $query */
+                $query->select('name');
+            },
+            'user' => function ($query) {
+                /** @var \Illuminate\Database\Eloquent\Builder $query */
+                $query->select('id', 'name', 'user_id');
+            },
+        ])
+            ->orderBy('created_at', 'desc')->get(['id', 'title', 'content', 'image_path', 'created_at', 'user_id']);
     }
 
     public function create(array $data, array $tags)

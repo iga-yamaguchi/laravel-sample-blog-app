@@ -19,11 +19,11 @@ class TagRepository implements TagRepositoryInterface
 
     public function all()
     {
-        return Tag::all();
+        return Tag::all(['name']);
     }
 
     /**
-     * @param Tag $tag
+     * @param Tag   $tag
      * @param array $data
      * @return bool
      */
