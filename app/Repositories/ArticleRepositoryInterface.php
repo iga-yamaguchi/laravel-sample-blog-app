@@ -14,6 +14,8 @@ interface ArticleRepositoryInterface
 
     function find(int $id);
 
+    function findOrFail(int $id);
+
     function delete(Article $article);
 
     function showByYear($year);

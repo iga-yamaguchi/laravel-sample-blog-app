@@ -33,7 +33,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $tags = Tag::all();
+        $tags = $this->tagRepository->all();
         return view('article.create', compact('tags'));
     }
 
@@ -47,16 +47,17 @@ class ArticleController extends Controller
 
     public function show(int $id)
     {
-        $article  = $this->articleRepository->find($id);
+        $article  = $this->articleRepository->findOrFail($id);
         $yearList = $this->articleRepository->yearList();
-        $tags     = Tag::all();
+        $tags     = $this->tagRepository->all();
         return view('article.show', compact('article', 'tags', 'yearList'));
     }
 
-    public function edit(Article $article)
+    public function edit(int $id)
     {
-        $tags = Tag::all();
-        return view('article.create', compact('article', 'tags'));
+        $article = $this->articleRepository->findOrFail($id);
+        $tags = $this->tagRepository->all();
+        return view('article.edit', compact('article', 'tags'));
     }
 
     public function update(ArticleRequest $request, Article $article)

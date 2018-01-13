@@ -8,22 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
+    protected $columns = ['id', 'title', 'content', 'image_path', 'created_at', 'user_id'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function all()
     {
-        return Article::with([
-            'tags' => function ($query) {
-                /** @var \Illuminate\Database\Eloquent\Builder $query */
-                $query->select('name');
-            },
-            'user' => function ($query) {
-                /** @var \Illuminate\Database\Eloquent\Builder $query */
-                $query->select('id', 'name', 'user_id');
-            },
-        ])
-            ->orderBy('created_at', 'desc')->get(['id', 'title', 'content', 'image_path', 'created_at', 'user_id']);
+        return Article::withTags()
+            ->withUser()
+            ->orderBy('created_at', 'desc')
+            ->get($this->columns);
     }
 
     public function create(array $data, array $tags)
@@ -51,7 +46,12 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function find(int $id)
     {
-        return Article::find($id);
+        return Article::withTags()->find($id, $this->columns);
+    }
+
+    public function findOrFail(int $id)
+    {
+        return Article::withTags()->findOrFail($id, $this->columns);
     }
 
     public function delete(Article $article)
