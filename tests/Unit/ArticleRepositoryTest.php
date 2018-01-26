@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestUtils\SetupDirectory;
 
 class ArticleRepositoryTest extends TestCase
 {
@@ -36,6 +37,12 @@ class ArticleRepositoryTest extends TestCase
         Artisan::call('migrate:refresh');
         $this->articles   = factory(Article::class, $this->articleCount)->create();
         $this->repository = new ArticleRepository();
+    }
+
+    public function tearDown()
+    {
+        SetupDirectory::cleanUploads();
+        parent::tearDown();
     }
 
     public function testAll()

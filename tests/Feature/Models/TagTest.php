@@ -19,12 +19,6 @@ class TagTest extends TestCase
         Artisan::call('migrate:refresh');
     }
 
-    public function tearDown()
-    {
-        SetupDirectory::cleanUploads();
-        parent::tearDown();
-    }
-
     public function testArticleRelation()
     {
         $this->assertBelongsToMany(Tag::class, Article::class, 'articles');
