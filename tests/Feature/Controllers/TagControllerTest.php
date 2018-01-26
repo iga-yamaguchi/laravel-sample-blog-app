@@ -23,12 +23,6 @@ class TagControllerTest extends TestCase
         $this->tags = factory(Tag::class, 10)->create();
     }
 
-    public function tearDown()
-    {
-        SetupDirectory::cleanUploads();
-        parent::tearDown();
-    }
-
     public function testCreate()
     {
         $tag = factory(Tag::class)->make();
